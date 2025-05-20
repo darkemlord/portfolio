@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
+import { OrbitControls, Stars, Environment, MeshDistortMaterial } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import { Group, Points } from 'three';
 import './Home.css';
@@ -21,7 +21,7 @@ function SpaceBackground() {
       radius={100}
       depth={50}
       count={5000}
-      factor={4}
+      factor={15}
       saturation={0}
       fade
       speed={1}
@@ -30,56 +30,32 @@ function SpaceBackground() {
 }
 
 function AnimatedModel() {
-  const modelRef = useRef<Group>(null);
+  const sphereRef = useRef<Group>(null);
   
   useFrame(({ clock }) => {
-    if (modelRef.current) {
-      modelRef.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.3) * 0.2;
-      modelRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.1;
+    if (sphereRef.current) {
+      sphereRef.current.rotation.y = clock.getElapsedTime() * 0.2;
+      sphereRef.current.rotation.x = clock.getElapsedTime() * 0.1;
+      sphereRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.2;
     }
   });
 
-  const goldMaterial = {
-    color: "#ffd700",
-    metalness: 0.9,
-    roughness: 0.1,
-    clearcoat: 1,
-    clearcoatRoughness: 0.1,
-    emissive: "#ffd700",
-    emissiveIntensity: 0.2,
-    envMapIntensity: 1
-  };
-
   return (
-    <group ref={modelRef}>
-      {/* Anillo superior */}
-      <mesh castShadow receiveShadow position={[0, 0.8, 0]}>
-        <torusGeometry args={[0.4, 0.1, 32, 32]} />
-        <meshPhysicalMaterial {...goldMaterial} />
-      </mesh>
-
-      {/* Línea vertical */}
-      <mesh castShadow receiveShadow position={[0, 0, 0]}>
-        <boxGeometry args={[0.15, 1.6, 0.15]} />
-        <meshPhysicalMaterial {...goldMaterial} />
-      </mesh>
-
-      {/* Línea horizontal */}
-      <mesh castShadow receiveShadow position={[0, -0.4, 0]}>
-        <boxGeometry args={[0.8, 0.15, 0.15]} />
-        <meshPhysicalMaterial {...goldMaterial} />
-      </mesh>
-
-      {/* Línea diagonal derecha */}
-      <mesh castShadow receiveShadow position={[0.3, -0.2, 0]} rotation={[0, 0, Math.PI / 4]}>
-        <boxGeometry args={[0.4, 0.15, 0.15]} />
-        <meshPhysicalMaterial {...goldMaterial} />
-      </mesh>
-
-      {/* Línea diagonal izquierda */}
-      <mesh castShadow receiveShadow position={[-0.3, -0.2, 0]} rotation={[0, 0, -Math.PI / 4]}>
-        <boxGeometry args={[0.4, 0.15, 0.15]} />
-        <meshPhysicalMaterial {...goldMaterial} />
+    <group ref={sphereRef} scale={1.5}>
+      {/* Esfera exterior reflectante */}
+      <mesh castShadow receiveShadow>
+        <sphereGeometry args={[1, 64, 64]} />
+        <MeshDistortMaterial
+          color="#ffffff"
+          envMapIntensity={1.5}
+          clearcoat={1}
+          clearcoatRoughness={0}
+          metalness={1}
+          roughness={0}
+          distort={0.4}
+          speed={1.5}
+          reflectivity={1}
+        />
       </mesh>
     </group>
   );
@@ -104,8 +80,16 @@ const Home: React.FC = () => {
           <fog attach="fog" args={['#1a1a1a', 10, 50]} />
           <ambientLight intensity={0.2} />
           <pointLight position={[10, 10, 10]} intensity={0.5} />
+          <spotLight 
+            position={[0, 5, 5]} 
+            intensity={0.8} 
+            angle={0.6} 
+            penumbra={0.5} 
+            castShadow 
+          />
           <SpaceBackground />
           <AnimatedModel />
+          <Environment preset="sunset" />
           <OrbitControls 
             enableZoom={false}
             enablePan={false}

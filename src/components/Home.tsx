@@ -39,17 +39,47 @@ function AnimatedModel() {
     }
   });
 
+  const goldMaterial = {
+    color: "#ffd700",
+    metalness: 0.9,
+    roughness: 0.1,
+    clearcoat: 1,
+    clearcoatRoughness: 0.1,
+    emissive: "#ffd700",
+    emissiveIntensity: 0.2,
+    envMapIntensity: 1
+  };
+
   return (
     <group ref={modelRef}>
-      <mesh castShadow receiveShadow>
-        <torusKnotGeometry args={[1, 0.3, 128, 32]} />
-        <meshStandardMaterial 
-          color="#c19a6b"
-          metalness={0.7}
-          roughness={0.2}
-          emissive="#c19a6b"
-          emissiveIntensity={0.2}
-        />
+      {/* Anillo superior */}
+      <mesh castShadow receiveShadow position={[0, 0.8, 0]}>
+        <torusGeometry args={[0.4, 0.1, 32, 32]} />
+        <meshPhysicalMaterial {...goldMaterial} />
+      </mesh>
+
+      {/* Línea vertical */}
+      <mesh castShadow receiveShadow position={[0, 0, 0]}>
+        <boxGeometry args={[0.15, 1.6, 0.15]} />
+        <meshPhysicalMaterial {...goldMaterial} />
+      </mesh>
+
+      {/* Línea horizontal */}
+      <mesh castShadow receiveShadow position={[0, -0.4, 0]}>
+        <boxGeometry args={[0.8, 0.15, 0.15]} />
+        <meshPhysicalMaterial {...goldMaterial} />
+      </mesh>
+
+      {/* Línea diagonal derecha */}
+      <mesh castShadow receiveShadow position={[0.3, -0.2, 0]} rotation={[0, 0, Math.PI / 4]}>
+        <boxGeometry args={[0.4, 0.15, 0.15]} />
+        <meshPhysicalMaterial {...goldMaterial} />
+      </mesh>
+
+      {/* Línea diagonal izquierda */}
+      <mesh castShadow receiveShadow position={[-0.3, -0.2, 0]} rotation={[0, 0, -Math.PI / 4]}>
+        <boxGeometry args={[0.4, 0.15, 0.15]} />
+        <meshPhysicalMaterial {...goldMaterial} />
       </mesh>
     </group>
   );

@@ -38,29 +38,37 @@
 }
 
 body {
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: #f8fafc;
+  font-family: 'Playfair Display', 'Cinzel', serif;
+  background: #1a1a1a;
   margin: 0;
   padding: 0;
-  color: #2d2e32;
+  color: #e0d3b4;
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(108, 99, 255, 0.07);
+  background: #2d2d2d;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
   padding: 1.2rem 2.5rem;
   border-radius: 0 0 1.5rem 1.5rem;
   margin-bottom: 2.5rem;
+  border-bottom: 2px solid #c19a6b;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #6C63FF;
-  letter-spacing: 1px;
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #c19a6b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .nav-links {
@@ -73,17 +81,18 @@ body {
 
 .nav-links li a {
   text-decoration: none;
-  color: #2d2e32;
+  color: #e0d3b4;
   font-weight: 600;
   font-size: 1.1rem;
   transition: color 0.2s;
   padding-bottom: 2px;
   border-bottom: 2px solid transparent;
+  font-family: 'Playfair Display', serif;
 }
 
 .nav-links li a:hover, .nav-links li a.active {
-  color: #6C63FF;
-  border-bottom: 2px solid #6C63FF;
+  color: #c19a6b;
+  border-bottom: 2px solid #c19a6b;
 }
 
 @media (max-width: 700px) {

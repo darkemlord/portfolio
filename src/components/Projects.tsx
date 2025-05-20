@@ -37,7 +37,7 @@ const Projects: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 + idx * 0.15, duration: 0.6 }}
-            whileHover={{ scale: 1.04, boxShadow: '0 8px 32px rgba(108,99,255,0.18)' }}
+            whileHover={{ scale: 1.02 }}
           >
             <h3>{project.title}</h3>
             <p>{project.description}</p>

@@ -31,6 +31,27 @@ function SpaceBackground() {
 
 function AnimatedModel() {
   const sphereRef = useRef<Group>(null);
+  const [scale, setScale] = useState(1.5);
+  
+  // Ajustar escala basado en el tamaño de pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        setScale(0.8);
+      } else if (window.innerWidth <= 768) {
+        setScale(1.0);
+      } else {
+        setScale(1.5);
+      }
+    };
+    
+    // Ajustar al cargar
+    handleResize();
+    
+    // Ajustar cuando cambie el tamaño
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   useFrame(({ clock }) => {
     if (sphereRef.current) {
@@ -41,7 +62,7 @@ function AnimatedModel() {
   });
 
   return (
-    <group ref={sphereRef} scale={1.5}>
+    <group ref={sphereRef} scale={scale}>
       {/* Esfera exterior reflectante */}
       <mesh castShadow receiveShadow>
         <sphereGeometry args={[1, 64, 64]} />

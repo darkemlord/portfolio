@@ -1,6 +1,6 @@
 .contact-container {
   max-width: 500px;
-  margin: 3rem auto;
+  margin: 6rem auto 3rem;
   background: #2d2d2d;
   border-radius: 1.5rem;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
@@ -102,4 +102,52 @@
   font-weight: 600;
   font-family: 'Playfair Display', serif;
   font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    margin-top: 8rem;
+    padding: 2rem 1.5rem;
+    max-width: 90%;
+  }
+  
+  .contact-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    margin-top: 9rem;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+    max-width: 95%;
+  }
+  
+  .contact-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-form {
+    gap: 1rem;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .contact-form button {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
 } 

@@ -90,8 +90,8 @@ const Home: React.FC = () => {
     <div className="home-container">
       <motion.div
         className="intro-text"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <h1>Hi, I'm Emanuel Caro</h1>

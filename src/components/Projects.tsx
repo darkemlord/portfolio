@@ -5,23 +5,19 @@ import './Projects.css';
 const projects = [
   {
     title: '3D Portfolio',
-    description: 'A stunning 3D animated portfolio built with React, Three.js, and TypeScript.',
-    link: '#',
+    description: 'A stunning 3D animated portfolio built with React, Three.js, and TypeScript.'
   },
   {
     title: 'E-commerce UI',
-    description: 'Modern, responsive e-commerce interface with advanced filtering and animations.',
-    link: '#',
+    description: 'Modern, responsive e-commerce interface with advanced filtering and animations.'
   },
   {
     title: 'Design System',
-    description: 'Reusable component library and design system for scalable web apps.',
-    link: '#',
+    description: 'Reusable component library and design system for scalable web apps.'
   },
   {
     title: 'Interactive Data Viz',
-    description: 'Beautiful, interactive data visualizations using D3 and React.',
-    link: '#',
+    description: 'Beautiful, interactive data visualizations using D3 and React.'
   },
 ];
 
@@ -41,7 +37,7 @@ const Projects: React.FC = () => {
           >
             <h3>{project.title}</h3>
             <p>{project.description}</p>
-            <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
+            <span className="coming-soon">Coming Soon</span>
           </motion.div>
         ))}
       </div>

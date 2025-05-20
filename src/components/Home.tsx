@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, Environment, MeshDistortMaterial } from '@react-three/drei';
 import { motion } from 'framer-motion';
@@ -61,18 +61,54 @@ function AnimatedModel() {
   );
 }
 
+const TypingText: React.FC<{ text: string, speed?: number, className?: string }> = ({ 
+  text, 
+  speed = 100,
+  className = "" 
+}) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timer = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(currentIndex + 1);
+      }, speed);
+      return () => clearTimeout(timer);
+    } else {
+      setIsComplete(true);
+    }
+  }, [currentIndex, text, speed]);
+
+  return <span className={`${className} ${isComplete ? 'typing-complete' : ''}`}>{displayedText}</span>;
+};
+
 const Home: React.FC = () => {
+  const [shine, setShine] = useState(false);
+
+  // Efecto de brillo cada 5 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShine(true);
+      setTimeout(() => setShine(false), 1000); // Duración del brillo: 1 segundo
+    }, 5000); // Intervalo: 5 segundos
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="home-container">
       <motion.div
-        className="intro-text"
+        className={`intro-text ${shine ? 'shine-effect' : ''}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <h1>Hi, I'm Emanuel Caro</h1>
-        <h2>Frontend Engineer</h2>
-        <p>Building stunning web experiences with React, TypeScript & 3D magic.</p>
+        <h1><TypingText text="Hi, I'm Emanuel Caro" speed={80} /></h1>
+        <h2><TypingText text="Frontend Engineer" speed={80} className="delayed-typing" /></h2>
+        <p><TypingText text="Building stunning web experiences with React, TypeScript & 3D magic." speed={30} className="delayed-typing-more" /></p>
       </motion.div>
       <div className="canvas-wrapper">
         <Canvas camera={{ position: [0, 0, 5], fov: 50 }} shadows>

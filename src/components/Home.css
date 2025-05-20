@@ -31,6 +31,59 @@
   border: 1px solid #c19a6b;
   width: 90%;
   max-width: 800px;
+  transition: box-shadow 0.5s ease-out;
+}
+
+/* Efecto de brillo */
+.shine-effect {
+  box-shadow: 0 0 25px #c19a6b, 0 0 40px #c19a6b;
+  border-color: #ffdd00;
+}
+
+.typing-complete {
+  border-right: none;
+}
+
+/* Efecto de cursor para typing */
+.delayed-typing, .delayed-typing-more {
+  opacity: 0;
+}
+
+h1 span {
+  border-right: 0.1em solid #c19a6b;
+  animation: blink-caret 1s step-end infinite;
+}
+
+h1 span.typing-complete {
+  border-right: none;
+}
+
+h2 span.delayed-typing {
+  border-right: 0.1em solid #c19a6b;
+  animation: fade-in 0.5s ease forwards 1.8s, blink-caret 1s step-end infinite 1.8s;
+}
+
+h2 span.typing-complete {
+  border-right: none;
+}
+
+p span.delayed-typing-more {
+  border-right: 0.1em solid #c19a6b;
+  animation: fade-in 0.5s ease forwards 3.5s, blink-caret 1s step-end infinite 3.5s;
+}
+
+p span.typing-complete {
+  border-right: none;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #c19a6b }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .intro-text h1 {
